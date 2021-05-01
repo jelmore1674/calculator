@@ -33,3 +33,8 @@ math function.
 
 > operate( '/', 100, 25) <br> Takes _'/'_ finds the operator function divide()
 > <br> Then runs the function _divide(100,25)_ <br> Outputting the result 4
+
+### Update 3
+
+Added the elements for the calculator in the _index.html_ file. Next up styling
+the calculator.
