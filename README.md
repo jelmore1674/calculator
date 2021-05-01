@@ -22,3 +22,14 @@ the basic math functions in the _app.js_ file.
 -   _Subtract_ Function
 -   _Multiply_ Function
 -   _Divide_ Function
+
+### Update 2
+
+Added a new function _Operate(operator,num1,num2)_ that take an **operator**
+_(functions from set 1)_ and two numbers in this case _(num1,num2)_ to run the
+math function.
+
+**Example**
+
+> operate( '/', 100, 25) <br> Takes _'/'_ finds the operator function divide()
+> <br> Then runs the function _divide(100,25)_ <br> Outputting the result 4
