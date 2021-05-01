@@ -38,3 +38,8 @@ math function.
 
 Added the elements for the calculator in the _index.html_ file. Next up styling
 the calculator.
+
+### Update 4
+
+Added the styling to the calculator. Looks really good. Now time to get work on
+the javascript to make it work! xD

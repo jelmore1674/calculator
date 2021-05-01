@@ -1,0 +1,63 @@
+/** @format */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    font-weight: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #4895ef, #b5179e);
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+.container>button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid rgb(189, 224, 254);
+    border-radius: 3%;
+    outline: none;
+    background-color: rgba(189, 224, 254, 0.75);
+}
+
+.container>button:hover {
+    background-color: rgba(189, 224, 254, 0.93);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    grid-column: 1/-1;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 12px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.output .previous-operand {
+    color: rgba(189, 224, 254, 0.5);
+    font-size: 1.5rem;
+}
+
+.output .current-operand {
+    color: rgba(189, 224, 254);
+    font-size: 2.5rem;
+}
