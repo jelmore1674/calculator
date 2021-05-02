@@ -43,3 +43,8 @@ the calculator.
 
 Added the styling to the calculator. Looks really good. Now time to get work on
 the javascript to make it work! xD
+
+### Update 5
+
+The calculator is fully functional! Make sure you take a look at the page and
+play around with it! https://jelmore1674.github.io/calculator/

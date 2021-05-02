@@ -8,23 +8,88 @@ class Calc {
 
     clear() {
         this.curOperand = "";
-        this.prevOperandText = "";
+        this.prevOperand = "";
         this.operation = undefined;
     }
 
-    delete() {}
+    delete() {
+        this.curOperand = this.curOperand.toString().slice(0, -1);
+    }
 
     appendNumber(number) {
         if (number === "." && this.curOperand.includes(".")) return;
         this.curOperand = this.curOperand.toString() + number.toString();
     }
 
-    chooseOperation(operation) {}
+    chooseOperation(op) {
+        if (this.curOperand === "") return;
+        if (this.prevOperand != "") {
+            this.operate();
+        }
+        this.operation = op;
+        this.prevOperand = this.curOperand;
+        this.curOperand = "";
+    }
 
-    compute() {}
+    operate() {
+        let math;
+        const a = parseFloat(this.prevOperand);
+        let b = parseFloat(this.curOperand);
+        if (a == 0 && b == 0) {
+            alert("You can't divide 0 by 0! Stupid Moron!");
+        }
+        if (isNaN(a) || isNaN(b)) return;
+        switch (this.operation) {
+            case "+":
+                math = a + b;
+                break;
+            case "-":
+                math = a - b;
+                break;
+            case "*":
+                math = a * b;
+                break;
+            case "/":
+                math = a / b;
+                break;
+            default:
+                return;
+        }
+        this.curOperand = math;
+        this.operation = undefined;
+        this.prevOperand = "";
+    }
+
+    getDisplayNumber(number) {
+        const stringNumber = number.toString();
+        const integerDigits = parseFloat(stringNumber.split(".")[0]);
+        const decimalDigits = stringNumber.split(".")[1];
+        let integerDisplay;
+        if (isNaN(integerDigits)) {
+            integerDisplay = "";
+        } else {
+            integerDisplay = integerDigits.toLocaleString("en", {
+                maximumFractionDigits: 0,
+            });
+        }
+        if (decimalDigits != null) {
+            return `${integerDisplay}.${decimalDigits}`;
+        } else {
+            return integerDisplay;
+        }
+    }
 
     updateDisplay() {
-        this.curOperandTextElement.innerText = this.curOperand;
+        this.curOperandTextElement.innerText = this.getDisplayNumber(
+            this.curOperand
+        );
+        if (this.operation != null) {
+            this.prevOperandTextElement.innerText = `${this.getDisplayNumber(
+				this.prevOperand
+			)} ${this.operation}`;
+        } else {
+            this.prevOperandTextElement.innerText = "";
+        }
     }
 }
 
@@ -40,6 +105,7 @@ const prevOperandTextElement = document.querySelector(
 const curOperandTextElement = document.querySelector("[data-current-operand]");
 
 const calc = new Calc(prevOperandTextElement, curOperandTextElement);
+
 numButtons.forEach((button) => {
     button.addEventListener("click", () => {
         calc.appendNumber(button.innerText);
@@ -47,30 +113,24 @@ numButtons.forEach((button) => {
     });
 });
 
-function add(a, b) {
-    return a + b;
-}
+operandButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        calc.chooseOperation(button.innerText);
+        calc.updateDisplay();
+    });
+});
 
-function subtract(a, b) {
-    return a - b;
-}
+equalButton.addEventListener("click", () => {
+    calc.operate();
+    calc.updateDisplay();
+});
 
-function multiply(a, b) {
-    return a * b;
-}
+acButton.addEventListener("click", () => {
+    calc.clear();
+    calc.updateDisplay();
+});
 
-function divide(a, b) {
-    return a / b;
-}
-
-function operate(operator, num1, num2) {
-    if (operator == "+") {
-        return add(num1, num2);
-    } else if (operator == "-") {
-        return subtract(num1, num2);
-    } else if (operator == "*") {
-        return multiply(num1, num2);
-    } else if (operator == "/") {
-        return divide(num1, num2);
-    }
-}
+delButton.addEventListener("click", () => {
+    calc.delete();
+    calc.updateDisplay();
+});
